@@ -308,5 +308,14 @@
       "sentiment_score": -0.3,
       "churn_risk": 0.7
     }
+  ],
+  "eac6d346-9a1e-46aa-8280-83b3bf3e69b9": [
+    {
+      "id": "96950ca7-8496-4eb6-85c3-29095661f628",
+      "conversation_id": "eac6d346-9a1e-46aa-8280-83b3bf3e69b9",
+      "role": "system",
+      "content": "Outbound call initiated to +918780034261 \u2014 SID: CAa93dfc3d360f6fcaf18de87140cec589",
+      "timestamp": "2026-06-07T09:56:00.631971"
+    }
   ]
 }
