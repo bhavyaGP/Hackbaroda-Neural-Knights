@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { Send, Loader2, Bot, User, ArrowLeft } from "lucide-react";
+import { Send, Loader2, Bot, User, Zap, AlertCircle, ArrowLeft } from "lucide-react";
 import { api } from "../lib/api";
 import { useWebSocket } from "../hooks/useWebSocket";
 
@@ -43,7 +43,7 @@ function AgentTrace({ agents }) {
 function Message({ msg, agents, negotiationOffer }) {
   const isAI = msg.role === "assistant";
   return (
-    <div className={`flex gap-3 ${isAI ? "" : "flex-row-reverse"} animate-fade-in`}>
+    <div className={`flex gap-3 ${isAI ? "" : "flex-row-reverse"}`}>
       <div
         className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
           isAI ? "bg-white" : "bg-gray-700"
@@ -66,6 +66,7 @@ function Message({ msg, agents, negotiationOffer }) {
             {agents && <AgentTrace agents={agents} />}
             {negotiationOffer && (
               <div className="flex items-center gap-1.5 text-xs text-gray-400 bg-gray-900 border border-gray-800 rounded-lg px-3 py-1.5 mt-1">
+                <Zap size={11} />
                 {negotiationOffer.description}
               </div>
             )}
@@ -145,7 +146,7 @@ export default function CustomerChat() {
           timestamp: new Date().toISOString(),
         }]);
       } catch {
-        setCustomer({ name: "Guest User", email: "guest@example.com", tier: "standard" });
+        setCustomer({ id: customerId, name: "Guest User", email: "guest@example.com", tier: "standard" });
         setMessages([{
           id: "greeting",
           role: "assistant",
@@ -207,10 +208,10 @@ export default function CustomerChat() {
         style={{ height: "88dvh" }}
       >
         {/* Header */}
-        <div className="flex items-center gap-3 px-4 py-4 border-b border-gray-900 flex-shrink-0">
+        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-gray-900 flex-shrink-0">
           <button
             onClick={() => navigate("/")}
-            className="text-gray-500 hover:text-white transition-colors"
+            className="text-gray-500 hover:text-white transition-colors mr-0.5"
           >
             <ArrowLeft size={17} />
           </button>
@@ -221,8 +222,8 @@ export default function CustomerChat() {
             <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-gray-400 rounded-full border-2 border-gray-950" />
           </div>
           <div className="flex-1">
-            <p className="font-medium text-sm text-white">Aria</p>
-            <p className="text-[11px] text-gray-500">AI Assistant</p>
+            <p className="font-semibold text-sm text-white">Aria - Support</p>
+            <p className="text-[11px] text-gray-400">Online</p>
           </div>
           {customer && (
             <div className="flex items-center gap-2">
@@ -235,6 +236,21 @@ export default function CustomerChat() {
             </div>
           )}
         </div>
+
+        {/* Owner active banner */}
+        {ownerActive && (
+          <div className="mx-3 mt-3 px-3 py-2 bg-gray-900 border border-gray-700 rounded-lg flex items-center gap-2 text-xs text-gray-300 flex-shrink-0">
+            <AlertCircle size={13} />
+            A support specialist is reviewing your case...
+          </div>
+        )}
+
+        {/* Churn retention message */}
+        {lastMeta.churn_risk >= 0.7 && (
+          <div className="mx-3 mt-3 px-3 py-2 bg-gray-900 border border-gray-700 rounded-lg text-xs text-gray-400 flex-shrink-0">
+            We value your trust. Let us make this right.
+          </div>
+        )}
 
         {/* Messages */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
@@ -266,14 +282,14 @@ export default function CustomerChat() {
             <button
               onClick={send}
               disabled={loading || !input.trim()}
-              className="w-10 h-10 rounded-xl bg-white hover:bg-gray-200 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center transition-all flex-shrink-0 text-black"
+              className="w-10 h-10 rounded-xl bg-white hover:bg-gray-200 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center transition-colors flex-shrink-0 text-black"
             >
               {loading ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
             </button>
           </div>
           {customer && (
             <p className="text-[10px] text-gray-600 mt-2 text-center">
-              {customer.name}
+              {customer.name} - {customer.email}
             </p>
           )}
         </div>

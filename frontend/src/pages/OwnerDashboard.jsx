@@ -2,8 +2,11 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import {
   Activity, AlertTriangle, MessageSquare, Users,
   Send, Bot, User, ChevronRight, RefreshCw,
-  Ticket, Brain, Loader2, TrendingUp,
+  Ticket, Brain, Loader2, TrendingUp, Phone, Zap, Shield,
 } from "lucide-react";
+import {
+  LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceLine,
+} from "recharts";
 import { api } from "../lib/api";
 import { useWebSocket } from "../hooks/useWebSocket";
 
@@ -121,7 +124,7 @@ function Transcript({ messages }) {
       {messages.map((msg, i) => {
         const isAI = msg.role === "assistant";
         return (
-          <div key={msg.id || i} className={`flex gap-2 ${isAI ? "" : "flex-row-reverse"} animate-fade-in`}>
+          <div key={msg.id || i} className={`flex gap-2 ${isAI ? "" : "flex-row-reverse"}`}>
             <div className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 ${isAI ? "bg-white" : "bg-gray-700"}`}>
               {isAI
                 ? <Bot size={12} className="text-black" />
@@ -147,7 +150,10 @@ export default function OwnerDashboard() {
   const [metrics, setMetrics] = useState(null);
   const [instruction, setInstruction] = useState("");
   const [sending, setSending] = useState(false);
+  const [sentInstructions, setSentInstructions] = useState([]);
   const [liveEvents, setLiveEvents] = useState([]);
+  const [calling, setCalling] = useState(false);
+  const [callStatus, setCallStatus] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const loadConversations = useCallback(async () => {
@@ -170,6 +176,10 @@ export default function OwnerDashboard() {
         avg_sentiment: 0,
         churn_risk_avg: 0,
         messages_today: 0,
+        high_risk_customers: 0,
+        open_tickets: 0,
+        resolved_today: 0,
+        total_conversations: 0,
       });
     }
   }, []);
@@ -198,194 +208,331 @@ export default function OwnerDashboard() {
 
   const handleWsMessage = useCallback((data) => {
     setLiveEvents((prev) => [{ ...data, id: Date.now() }, ...prev.slice(0, 19)]);
-    if (data.event === "metrics_update") {
-      setMetrics(data.metrics);
-    }
-  }, []);
 
-  useWebSocket("/api/dashboard/ws", handleWsMessage, []);
+    if (data.event === "message_update") {
+      setConversations((prev) =>
+        prev.map((c) =>
+          c.id === data.conversation_id
+            ? { ...c, sentiment_score: data.sentiment_score, churn_risk: data.churn_risk, intent: data.intent, last_message: data.last_message }
+            : c
+        )
+      );
+      if (data.conversation_id === selectedConvId) {
+        setIntelligence((prev) => prev ? { ...prev, churn_risk: data.churn_risk } : prev);
+        api.getHistory(data.conversation_id).then((h) => setMessages(h.messages || []));
+      }
+    }
+    if (data.event === "conversation_started") loadConversations();
+  }, [selectedConvId, loadConversations]);
+
+  useWebSocket("/api/dashboard/ws", handleWsMessage);
 
   const sendInstruction = async () => {
-    if (!instruction.trim() || !selectedConvId || sending) return;
+    if (!instruction.trim() || !selectedConvId) return;
     setSending(true);
     try {
-      await api.sendInstruction(selectedConvId, instruction);
+      await api.intervene(selectedConvId, instruction.trim());
+      setSentInstructions((prev) => [
+        { text: instruction.trim(), time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) },
+        ...prev.slice(0, 9),
+      ]);
       setInstruction("");
-    } catch {
+    } finally {
+      setSending(false);
     }
-    setSending(false);
   };
+
+  const sentimentData = (intelligence?.sentiment_logs || []).map((s, i) => ({
+    i, sentiment: s.sentiment_score, churn: s.churn_risk,
+  }));
+
+  const riskInfo = intelligence ? riskLevel(intelligence.churn_risk || 0) : null;
 
   return (
     <div className="min-h-[100dvh] bg-black flex flex-col">
-      {/* Header */}
-      <header className="h-14 px-4 flex items-center gap-4 border-b border-gray-900 bg-gray-950 flex-shrink-0">
-        <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded bg-white flex items-center justify-center">
+
+      {/* Top bar */}
+      <header className="border-b border-gray-900 px-5 py-3 flex items-center gap-4 flex-shrink-0">
+        <div className="flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded-lg bg-white flex items-center justify-center">
             <Brain size={14} className="text-black" />
           </div>
-          <span className="font-medium text-white text-sm">Neural Knights</span>
+          <div>
+            <p className="font-bold text-sm text-white leading-none">Neural Knights</p>
+            <p className="text-[10px] text-gray-500 mt-0.5">Customer Intelligence Agent</p>
+          </div>
         </div>
         <div className="flex-1" />
-        <button
-          onClick={() => { loadConversations(); loadMetrics(); }}
-          className="p-2 rounded-lg hover:bg-gray-900 transition-colors text-gray-500"
-        >
-          <RefreshCw size={16} />
-        </button>
+        <div className="flex items-center gap-1.5 text-xs text-gray-400">
+          <div className="w-1.5 h-1.5 rounded-full bg-gray-500" />
+          Live
+        </div>
       </header>
 
-      <div className="flex-1 flex overflow-hidden">
-        {/* Left panel - Conversations */}
-        <aside className="w-72 border-r border-gray-900 flex flex-col bg-gray-950 flex-shrink-0">
-          <div className="p-3 border-b border-gray-900">
-            <h2 className="text-sm font-medium text-white">Conversations</h2>
+      {/* Metrics row */}
+      {metrics && (
+        <div className="px-5 py-3 grid grid-cols-3 md:grid-cols-6 gap-3 border-b border-gray-900 flex-shrink-0">
+          <MetricCard icon={Activity} label="Active" value={metrics.active_conversations} sub="now" variant="light" />
+          <MetricCard icon={AlertTriangle} label="High Risk" value={metrics.high_risk_customers || 0} sub="churn" variant="dark" />
+          <MetricCard icon={Ticket} label="Open Tickets" value={metrics.open_tickets || 0} sub="unresolved" variant="light" />
+          <MetricCard icon={TrendingUp} label="Avg Sentiment" value={metrics.avg_sentiment > 0 ? `+${metrics.avg_sentiment}` : metrics.avg_sentiment} sub="active" variant={metrics.avg_sentiment >= 0 ? "light" : "dark"} />
+          <MetricCard icon={MessageSquare} label="Resolved Today" value={metrics.resolved_today || 0} sub="closed" variant="light" />
+          <MetricCard icon={Users} label="Total" value={metrics.total_conversations || 0} sub="all time" variant="default" />
+        </div>
+      )}
+
+      {/* 3-column layout */}
+      <div className="flex-1 flex overflow-hidden px-5 pb-5 pt-4 gap-4 min-h-0">
+
+        {/* Column 1: Conversations */}
+        <div className="w-64 flex-shrink-0 flex flex-col gap-3 min-h-0">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-gray-400">Conversations</span>
+            <button onClick={loadConversations} className="text-gray-600 hover:text-gray-300 transition-colors">
+              <RefreshCw size={13} />
+            </button>
           </div>
-          <div className="flex-1 overflow-y-auto p-2 space-y-1">
-            {loading ? (
-              <div className="flex items-center justify-center py-8">
-                <Loader2 size={20} className="animate-spin text-gray-600" />
+
+          <div className="flex-1 overflow-y-auto space-y-2 min-h-0">
+            {loading
+              ? <div className="flex items-center justify-center py-8"><Loader2 size={20} className="animate-spin text-gray-600" /></div>
+              : conversations.length === 0
+              ? <p className="text-xs text-gray-700 text-center py-8">No conversations yet</p>
+              : conversations.map((c) => (
+                  <ConvItem key={c.id} conv={c} selected={c.id === selectedConvId} onClick={() => selectConversation(c.id)} />
+                ))
+            }
+          </div>
+
+          {/* Live events */}
+          <div className="border-t border-gray-900 pt-3 flex-shrink-0">
+            <p className="text-[10px] text-gray-600 mb-1.5 flex items-center gap-1 font-medium uppercase tracking-wide">
+              <Activity size={10} /> Events
+            </p>
+            <div className="space-y-1 max-h-28 overflow-y-auto">
+              {liveEvents.slice(0, 8).map((e) => (
+                <div key={e.id} className="text-[10px] text-gray-600 flex items-center gap-1.5">
+                  <div className="w-1 h-1 rounded-full bg-gray-600 flex-shrink-0" />
+                  <span className="truncate">{e.event}: {e.customer_name || e.conversation_id?.slice(0, 8) || ""}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Column 2: Live transcript */}
+        <div className="flex-1 flex flex-col border border-gray-900 rounded-xl bg-gray-950 overflow-hidden min-h-0">
+          <div className="px-4 py-3 border-b border-gray-900 flex items-center justify-between flex-shrink-0">
+            <span className="text-xs font-semibold text-gray-400 flex items-center gap-2">
+              <MessageSquare size={13} />
+              Live Transcript
+              {selectedConvId && (
+                <span className="text-gray-600 font-normal">{selectedConvId.slice(0, 8)}...</span>
+              )}
+            </span>
+            {intelligence && (
+              <div className="w-32">
+                <SentimentBar score={intelligence.conversation?.sentiment_score || 0} />
               </div>
-            ) : conversations.length === 0 ? (
-              <p className="text-xs text-gray-600 text-center py-4">No conversations</p>
-            ) : (
-              conversations.map((conv) => (
-                <ConvItem
-                  key={conv.conversation_id}
-                  conv={conv}
-                  selected={selectedConvId === conv.conversation_id}
-                  onClick={() => selectConversation(conv.conversation_id)}
-                />
-              ))
             )}
           </div>
-        </aside>
 
-        {/* Center panel - Transcript */}
-        <main className="flex-1 flex flex-col bg-black">
-          <div className="flex-1 overflow-hidden">
-            <Transcript messages={messages} />
-          </div>
+          <Transcript messages={messages} />
 
-          {/* Instruction input */}
-          {selectedConvId && (
-            <div className="p-3 border-t border-gray-900 bg-gray-950">
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  className="flex-1 bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-gray-600 transition-colors"
-                  placeholder="Send instruction to AI..."
-                  value={instruction}
-                  onChange={(e) => setInstruction(e.target.value)}
-                  onKeyDown={(e) => { if (e.key === "Enter") sendInstruction(); }}
-                />
-                <button
-                  onClick={sendInstruction}
-                  disabled={sending || !instruction.trim()}
-                  className="px-4 py-2 rounded-lg bg-white hover:bg-gray-200 disabled:opacity-30 disabled:cursor-not-allowed text-black text-sm font-medium transition-all flex items-center gap-2"
-                >
-                  {sending ? <Loader2 size={14} className="animate-spin" /> : <Send size={14} />}
-                </button>
-              </div>
+          {/* Intervention panel */}
+          <div className="border-t border-gray-900 p-3.5 flex-shrink-0 space-y-2.5">
+            <div className="flex items-center gap-2 text-xs text-gray-400">
+              <Shield size={12} />
+              <span className="font-semibold">Owner Intervention</span>
+              <span className="text-gray-600">AI integrates seamlessly</span>
             </div>
-          )}
-        </main>
 
-        {/* Right panel - Metrics & Intelligence */}
-        <aside className="w-80 border-l border-gray-900 flex flex-col bg-gray-950 flex-shrink-0 overflow-y-auto">
-          <div className="p-4 border-b border-gray-900">
-            <h2 className="text-sm font-medium text-white">Metrics</h2>
-          </div>
-
-          {/* Metric cards */}
-          <div className="p-3 space-y-3">
-            <MetricCard
-              icon={MessageSquare}
-              label="Active Conversations"
-              value={metrics?.active_conversations || 0}
-              sub="now"
-              variant="default"
-            />
-            <MetricCard
-              icon={TrendingUp}
-              label="Avg Sentiment"
-              value={(metrics?.avg_sentiment || 0).toFixed(2)}
-              sub="today"
-              variant="light"
-            />
-            <MetricCard
-              icon={AlertTriangle}
-              label="Churn Risk"
-              value={`${((metrics?.churn_risk_avg || 0) * 100).toFixed(0)}%`}
-              sub="avg"
-              variant="dark"
-            />
-            <MetricCard
-              icon={Users}
-              label="Messages"
-              value={metrics?.messages_today || 0}
-              sub="today"
-              variant="default"
-            />
-          </div>
-
-          {/* Intelligence */}
-          {intelligence && (
-            <>
-              <div className="p-4 border-t border-gray-900">
-                <h2 className="text-sm font-medium text-white">Intelligence</h2>
+            {sentInstructions.length > 0 && (
+              <div className="space-y-1 max-h-16 overflow-y-auto">
+                {sentInstructions.map((s, i) => (
+                  <div key={i} className="text-[10px] flex items-start gap-1.5 text-gray-500">
+                    <ChevronRight size={10} className="text-gray-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-gray-400 flex-1 truncate">{s.text}</span>
+                    <span className="text-gray-700 flex-shrink-0">{s.time}</span>
+                  </div>
+                ))}
               </div>
-              <div className="px-4 pb-4 space-y-4">
-                <div>
-                  <p className="text-[11px] text-gray-600 mb-1">Sentiment</p>
-                  <SentimentBar score={intelligence.sentiment_score || 0} />
-                </div>
-                <div>
-                  <p className="text-[11px] text-gray-600 mb-1">Churn Risk</p>
-                  <div className="flex items-center gap-2">
-                    <div className="flex-1 h-1 bg-gray-800 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-gray-400 rounded-full"
-                        style={{ width: `${((intelligence.churn_risk || 0) * 100)}%` }}
-                      />
-                    </div>
-                    <span className="text-[11px] text-gray-400 tabular-nums">
-                      {((intelligence.churn_risk || 0) * 100).toFixed(0)}%
-                    </span>
+            )}
+
+            <div className="flex gap-2">
+              <input
+                className="flex-1 bg-gray-900 border border-gray-800 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-gray-600 placeholder-gray-600 text-gray-100 transition-colors"
+                placeholder='e.g. "Offer 20% discount" or "Escalate to tech team"'
+                value={instruction}
+                onChange={(e) => setInstruction(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && sendInstruction()}
+                disabled={!selectedConvId}
+              />
+              <button
+                onClick={sendInstruction}
+                disabled={!instruction.trim() || !selectedConvId || sending}
+                className="px-3 py-2 bg-white hover:bg-gray-200 disabled:opacity-30 rounded-lg text-xs font-semibold text-black transition-colors flex items-center gap-1 flex-shrink-0"
+              >
+                <Send size={11} />
+                {sending ? "..." : "Send"}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Column 3: Customer intelligence */}
+        <div className="w-72 flex-shrink-0 flex flex-col gap-3 overflow-y-auto min-h-0">
+          {!intelligence ? (
+            <div className="flex-1 flex flex-col items-center justify-center text-gray-700 gap-3 py-20">
+              <Brain size={36} />
+              <p className="text-sm text-center text-gray-600">Select a conversation</p>
+            </div>
+          ) : (
+            <>
+              {/* Customer profile */}
+              <div className="bg-gray-950 border border-gray-900 rounded-xl p-4 space-y-3 flex-shrink-0">
+                <p className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider">Customer Profile</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-sm font-bold text-white flex-shrink-0">
+                    {intelligence.customer?.name?.[0] || "?"}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-sm text-white">{intelligence.customer?.name}</p>
+                    <p className="text-xs text-gray-500">{intelligence.customer?.email}</p>
                   </div>
                 </div>
-                {intelligence.top_intents?.length > 0 && (
-                  <div>
-                    <p className="text-[11px] text-gray-600 mb-2">Top Intents</p>
+
+                <div className="grid grid-cols-2 gap-2">
+                  {[
+                    { label: "Tier", value: intelligence.customer?.tier },
+                    { label: "LTV", value: `$${intelligence.customer?.lifetime_value?.toLocaleString() || 0}` },
+                  ].map(({ label, value }) => (
+                    <div key={label} className="bg-gray-900 rounded-lg p-2.5">
+                      <p className="text-[10px] text-gray-500 mb-0.5">{label}</p>
+                      <p className="text-sm font-semibold text-white capitalize">{value}</p>
+                    </div>
+                  ))}
+                  <div className="bg-gray-900 rounded-lg p-2.5 col-span-2">
+                    <p className="text-[10px] text-gray-500 mb-1">Products</p>
                     <div className="flex flex-wrap gap-1">
-                      {intelligence.top_intents.map((intent, i) => (
-                        <span key={i} className="text-[10px] px-2 py-1 rounded bg-gray-900 border border-gray-800 text-gray-400">
-                          {intent}
-                        </span>
+                      {intelligence.customer?.products?.map((p) => (
+                        <span key={p} className="text-[10px] px-1.5 py-0.5 rounded bg-gray-800 text-gray-400 border border-gray-700">{p}</span>
                       ))}
                     </div>
                   </div>
+                </div>
+
+                <button
+                  onClick={async () => {
+                    setCalling(true);
+                    setCallStatus(null);
+                    try {
+                      const r = await api.callCustomer(intelligence.customer?.id);
+                      setCallStatus(r.call_sid
+                        ? { ok: true, msg: `Dialing ${intelligence.customer?.name} at ${r.to}` }
+                        : { ok: false, msg: r.detail || "Call failed" }
+                      );
+                    } catch {
+                      setCallStatus({ ok: false, msg: "Network error" });
+                    } finally {
+                      setCalling(false);
+                    }
+                  }}
+                  disabled={calling}
+                  className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-white hover:bg-gray-200 disabled:opacity-40 text-sm font-semibold text-black transition-colors"
+                >
+                  {calling ? <Loader2 size={14} className="animate-spin" /> : <Phone size={14} />}
+                  {calling ? "Dialing..." : `Call ${intelligence.customer?.name?.split(" ")[0]}`}
+                </button>
+                {callStatus && (
+                  <p className={`text-xs text-center ${callStatus.ok ? "text-gray-400" : "text-gray-500"}`}>
+                    {callStatus.msg}
+                  </p>
                 )}
               </div>
+
+              {/* Churn risk */}
+              <div className="bg-gray-950 border border-gray-900 rounded-xl p-4 space-y-2.5 flex-shrink-0">
+                <p className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider">Churn Risk</p>
+                {riskInfo && (
+                  <div className={`rounded-lg border px-3 py-2.5 flex items-center justify-between ${RISK_BG[riskInfo]}`}>
+                    <span className={`text-xs font-semibold uppercase tracking-wide ${RISK_COLOR[riskInfo]}`}>{riskInfo}</span>
+                    <span className={`text-xl font-bold tabular-nums ${RISK_COLOR[riskInfo]}`}>
+                      {((intelligence.churn_risk || 0) * 100).toFixed(0)}%
+                    </span>
+                  </div>
+                )}
+                {sentimentData.length > 1 && (
+                  <div className="h-20 mt-1">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart data={sentimentData}>
+                        <ReferenceLine y={0} stroke="#3f3f46" strokeDasharray="2 2" />
+                        <Line type="monotone" dataKey="sentiment" stroke="#737373" strokeWidth={2} dot={false} />
+                        <Tooltip
+                          contentStyle={{ background: "#0a0a0a", border: "1px solid #262626", borderRadius: 8, fontSize: 11 }}
+                          formatter={(v) => [v.toFixed(2), "Sentiment"]}
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                )}
+              </div>
+
+              {/* AI recommendations */}
+              {intelligence.recommended_actions?.length > 0 && (
+                <div className="bg-gray-950 border border-gray-900 rounded-xl p-4 space-y-2 flex-shrink-0">
+                  <p className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
+                    <Zap size={11} className="text-gray-500" /> AI Recommendations
+                  </p>
+                  <div className="space-y-1.5">
+                    {intelligence.recommended_actions.map((a, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setInstruction(a)}
+                        className="w-full text-left text-xs px-3 py-2 bg-gray-900 hover:bg-gray-800 border border-gray-800 hover:border-gray-600 rounded-lg transition-all text-gray-400 hover:text-gray-100 flex items-center gap-2"
+                      >
+                        <ChevronRight size={11} className="text-gray-500 flex-shrink-0" />
+                        {a}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Open tickets */}
+              {intelligence.tickets?.length > 0 && (
+                <div className="bg-gray-950 border border-gray-900 rounded-xl p-4 space-y-2 flex-shrink-0">
+                  <p className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
+                    <Ticket size={11} /> Tickets ({intelligence.tickets.length})
+                  </p>
+                  {intelligence.tickets.slice(0, 3).map((t) => (
+                    <div key={t.id} className="text-xs bg-gray-900 rounded-lg p-2.5">
+                      <div className="flex items-center justify-between mb-0.5">
+                        <span className="font-semibold text-white truncate mr-2">{t.title}</span>
+                        <span className={`text-[10px] px-1.5 py-0.5 rounded flex-shrink-0 ${
+                          t.priority === "critical" ? "bg-gray-800 text-gray-300" :
+                          t.priority === "high" ? "bg-gray-800 text-gray-400" :
+                          "bg-gray-800 text-gray-500"
+                        }`}>{t.priority}</span>
+                      </div>
+                      <p className="text-gray-600 truncate">{t.description?.slice(0, 60)}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Detected intent */}
+              {intelligence.conversation?.intent && (
+                <div className="bg-gray-950 border border-gray-900 rounded-xl p-4 flex-shrink-0">
+                  <p className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider mb-2">Detected Intent</p>
+                  <span className="text-sm font-semibold text-gray-300 capitalize">
+                    {intelligence.conversation.intent.replace(/_/g, " ")}
+                  </span>
+                </div>
+              )}
             </>
           )}
-
-          {/* Live events */}
-          <div className="p-4 border-t border-gray-900 mt-auto flex-shrink-0">
-            <h2 className="text-sm font-medium text-white mb-3">Live Events</h2>
-            <div className="space-y-2 max-h-48 overflow-y-auto">
-              {liveEvents.length === 0 ? (
-                <p className="text-[11px] text-gray-600">No events yet</p>
-              ) : (
-                liveEvents.map((event) => (
-                  <div key={event.id} className="text-[11px] text-gray-500 py-1 border-b border-gray-900">
-                    <span className="text-gray-600">{new Date().toLocaleTimeString()}</span> {event.event || 'event'}
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
-        </aside>
+        </div>
       </div>
     </div>
   );
