@@ -51,13 +51,12 @@ async def send_message(body: MessageIn):
     if not customer:
         raise HTTPException(404, "Customer not found")
 
-    # Store customer message
-    store.add_message(conv_id, "customer", body.content)
+    # Store customer message (capture object for live broadcast)
+    customer_msg = store.add_message(conv_id, "customer", body.content)
     history = store.get_messages(conv_id)
 
-    # Check for pending owner intervention
-    pending_iv = store.get_pending_intervention(conv_id)
-    owner_instruction = pending_iv["instruction"] if pending_iv else None
+    # Get full intervention history (new + already applied)
+    owner_interventions = store.get_all_interventions(conv_id)
 
     # Run supervisor
     agent_resp: AgentResponse = await process_message(
@@ -66,12 +65,11 @@ async def send_message(body: MessageIn):
         customer_message=body.content,
         conversation_history=history[:-1],
         customer_profile=customer,
-        owner_instruction=owner_instruction,
+        owner_interventions=owner_interventions,
     )
 
-    # Mark intervention applied
-    if pending_iv:
-        store.mark_applied(conv_id, pending_iv["id"])
+    # Mark all pending interventions applied now that agent has processed them
+    store.mark_all_pending_applied(conv_id)
 
     # Store AI response
     ai_msg = store.add_message(conv_id, "assistant", agent_resp.response, {
@@ -109,7 +107,7 @@ async def send_message(body: MessageIn):
         memory_note=agent_resp.memory_note,
     ))
 
-    # Push real-time update to dashboard
+    # Push real-time update to dashboard — include full message objects so UI can append directly
     await ws_manager.broadcast_conversation_update(conv_id, "message_update", {
         "customer_id": body.customer_id,
         "customer_name": customer["name"],
@@ -119,8 +117,9 @@ async def send_message(body: MessageIn):
         "intent": agent_resp.intent,
         "agents_used": agent_resp.agents_used,
         "last_message": body.content[:80],
+        "new_messages": [customer_msg, ai_msg],
         "negotiation_offer": agent_resp.actions.negotiation_offer.model_dump() if agent_resp.actions.negotiation_offer else None,
-        "owner_instruction_applied": bool(owner_instruction),
+        "owner_instruction_applied": bool(owner_interventions.get("new")),
     })
 
     # Push AI response to conversation WebSocket

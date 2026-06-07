@@ -64,5 +64,155 @@
       "churn_risk": 0.7,
       "intent": "cancellation"
     }
+  ],
+  "fc16261f-dab6-4aa7-b30e-3c258d55a926": [
+    {
+      "timestamp": "2026-06-07T10:19:00.522521",
+      "sentiment_score": -0.5,
+      "churn_risk": 0.55,
+      "intent": "technical"
+    },
+    {
+      "timestamp": "2026-06-07T10:19:32.430315",
+      "sentiment_score": -0.5,
+      "churn_risk": 0.65,
+      "intent": "cancellation"
+    },
+    {
+      "timestamp": "2026-06-07T10:19:58.118392",
+      "sentiment_score": -0.5,
+      "churn_risk": 0.6,
+      "intent": "cancellation"
+    }
+  ],
+  "d9b6ad33-8ab0-4210-9443-7cf3d72ed574": [
+    {
+      "timestamp": "2026-06-07T10:30:07.201283",
+      "sentiment_score": -0.5,
+      "churn_risk": 0.6,
+      "intent": "technical"
+    },
+    {
+      "timestamp": "2026-06-07T10:30:34.131798",
+      "sentiment_score": -0.7,
+      "churn_risk": 0.8,
+      "intent": "cancellation"
+    },
+    {
+      "timestamp": "2026-06-07T10:31:05.559018",
+      "sentiment_score": -0.6,
+      "churn_risk": 0.65,
+      "intent": "cancellation"
+    },
+    {
+      "timestamp": "2026-06-07T10:31:39.558435",
+      "sentiment_score": -0.6,
+      "churn_risk": 0.7,
+      "intent": "cancellation"
+    },
+    {
+      "timestamp": "2026-06-07T10:32:09.152032",
+      "sentiment_score": 0.5,
+      "churn_risk": 0.55,
+      "intent": "cancellation"
+    },
+    {
+      "timestamp": "2026-06-07T10:32:35.371744",
+      "sentiment_score": 0.4,
+      "churn_risk": 0.55,
+      "intent": "cancellation"
+    }
+  ],
+  "d92a6c21-2180-4d07-a771-00112f0fce26": [
+    {
+      "timestamp": "2026-06-07T10:55:41.209092",
+      "sentiment_score": -0.7,
+      "churn_risk": 0.65,
+      "intent": "cancellation"
+    },
+    {
+      "timestamp": "2026-06-07T10:56:21.753908",
+      "sentiment_score": -0.7,
+      "churn_risk": 0.6,
+      "intent": "cancellation"
+    },
+    {
+      "timestamp": "2026-06-07T10:57:04.040152",
+      "sentiment_score": -0.5,
+      "churn_risk": 0.65,
+      "intent": "cancellation"
+    },
+    {
+      "timestamp": "2026-06-07T10:58:05.793309",
+      "sentiment_score": -0.5,
+      "churn_risk": 0.65,
+      "intent": "cancellation"
+    }
+  ],
+  "1d603393-b4ee-4c3b-9d9a-753e406d12df": [
+    {
+      "timestamp": "2026-06-07T11:12:39.126345",
+      "sentiment_score": -0.3,
+      "churn_risk": 0.62,
+      "intent": "technical"
+    },
+    {
+      "timestamp": "2026-06-07T11:13:09.288505",
+      "sentiment_score": -0.5,
+      "churn_risk": 0.65,
+      "intent": "technical"
+    },
+    {
+      "timestamp": "2026-06-07T11:13:47.687869",
+      "sentiment_score": -0.4,
+      "churn_risk": 0.92,
+      "intent": "cancellation"
+    }
+  ],
+  "2472cc09-2e58-4cd4-afe9-9b21c42cb806": [
+    {
+      "timestamp": "2026-06-07T11:20:24.101470",
+      "sentiment_score": -0.7,
+      "churn_risk": 0.65,
+      "intent": "complaint"
+    },
+    {
+      "timestamp": "2026-06-07T11:21:00.558062",
+      "sentiment_score": -0.7,
+      "churn_risk": 0.65,
+      "intent": "cancellation"
+    },
+    {
+      "timestamp": "2026-06-07T11:21:43.656524",
+      "sentiment_score": -0.5,
+      "churn_risk": 0.65,
+      "intent": "cancellation"
+    },
+    {
+      "timestamp": "2026-06-07T11:22:21.042516",
+      "sentiment_score": -0.4,
+      "churn_risk": 0.6,
+      "intent": "cancellation"
+    }
+  ],
+  "cc905397-4e8c-4f35-b605-66f216325bc3": [
+    {
+      "timestamp": "2026-06-07T11:36:23.944063",
+      "sentiment_score": -0.3,
+      "churn_risk": 0.65,
+      "intent": "technical"
+    },
+    {
+      "timestamp": "2026-06-07T11:36:52.291875",
+      "sentiment_score": -0.2,
+      "churn_risk": 0.4,
+      "intent": "billing"
+    },
+    {
+      "timestamp": "2026-06-07T11:37:18.496101",
+      "sentiment_score": -0.5,
+      "churn_risk": 0.7,
+      "intent": "cancellation"
+    }
   ]
 }

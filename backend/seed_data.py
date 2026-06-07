@@ -41,12 +41,22 @@ DEMO_CUSTOMERS = [
         "id": "C004",
         "name": "Priya Sharma",
         "email": "priya.sharma@ecomm.in",
-        "phone": "+918780034261",
+        "phone": "+919099477111",
         "tier": "premium",
-        "products": ["Analytics Pro", "Reporting Suite"],
+        "products": ["Analytics Pro", "QuicklearnAI's Scholar's Pack"],
         "subscription_status": "active",
         "lifetime_value": 5200.0,
     },
+    {
+        "id": "C005",
+        "name": "Priya Varma",
+        "email": "priya.varma@ecomm.in",
+        "phone": "+919099477111",
+        "tier": "premium",
+        "products": ["Analytics Pro", "QuicklearnAI's Scholar's Pack"],
+        "subscription_status": "active",
+        "lifetime_value": 5200.0,
+    }
 ]
 
 CUSTOMER_HISTORIES = {

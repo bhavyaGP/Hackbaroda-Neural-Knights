@@ -158,11 +158,29 @@ class JsonStore:
                 return iv
         return None
 
+    def get_all_interventions(self, conv_id: str) -> dict:
+        """Return all interventions split into pending (new) and applied (history)."""
+        all_ivs = self._cache["interventions"].get(conv_id, [])
+        return {
+            "new":     [iv for iv in all_ivs if not iv["applied"]],
+            "history": [iv for iv in all_ivs if iv["applied"]],
+        }
+
     def mark_applied(self, conv_id: str, iv_id: str):
         for iv in self._cache["interventions"].get(conv_id, []):
             if iv["id"] == iv_id:
                 iv["applied"] = True
         self._save("interventions")
+
+    def mark_all_pending_applied(self, conv_id: str):
+        """Mark every unapplied intervention as applied at once."""
+        changed = False
+        for iv in self._cache["interventions"].get(conv_id, []):
+            if not iv["applied"]:
+                iv["applied"] = True
+                changed = True
+        if changed:
+            self._save("interventions")
 
     # ── Sentiment logs ─────────────────────────────────────────────────────────
 

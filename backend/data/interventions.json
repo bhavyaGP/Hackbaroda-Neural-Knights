@@ -7,5 +7,85 @@
       "timestamp": "2026-06-07T09:41:09.070284",
       "applied": true
     }
+  ],
+  "fc16261f-dab6-4aa7-b30e-3c258d55a926": [
+    {
+      "id": "b2d397ad-93c6-4a95-816b-0bef2ad11985",
+      "conversation_id": "fc16261f-dab6-4aa7-b30e-3c258d55a926",
+      "instruction": "offer 20% discount",
+      "timestamp": "2026-06-07T10:30:40.401886",
+      "applied": false
+    },
+    {
+      "id": "ec5c5561-9ea3-4be3-82c4-5fb5ebb88a33",
+      "conversation_id": "fc16261f-dab6-4aa7-b30e-3c258d55a926",
+      "instruction": "offer 3 month free subcription",
+      "timestamp": "2026-06-07T10:32:05.034735",
+      "applied": false
+    },
+    {
+      "id": "32a58233-4932-4108-8da5-a627b9f6ba54",
+      "conversation_id": "fc16261f-dab6-4aa7-b30e-3c258d55a926",
+      "instruction": "cancel the discount",
+      "timestamp": "2026-06-07T10:32:56.397742",
+      "applied": false
+    }
+  ],
+  "d92a6c21-2180-4d07-a771-00112f0fce26": [
+    {
+      "id": "d9d49622-f088-45c3-8745-42aabf4c04ab",
+      "conversation_id": "d92a6c21-2180-4d07-a771-00112f0fce26",
+      "instruction": "offer 20% discount",
+      "timestamp": "2026-06-07T10:56:17.516961",
+      "applied": true
+    },
+    {
+      "id": "426a1d79-4a1c-4755-ad3f-2fb1d99b94e2",
+      "conversation_id": "d92a6c21-2180-4d07-a771-00112f0fce26",
+      "instruction": "GIve him 3 month subcription free",
+      "timestamp": "2026-06-07T10:57:31.549319",
+      "applied": true
+    }
+  ],
+  "1d603393-b4ee-4c3b-9d9a-753e406d12df": [
+    {
+      "id": "e52b515c-5616-40ec-9960-89a16549d29d",
+      "conversation_id": "1d603393-b4ee-4c3b-9d9a-753e406d12df",
+      "instruction": "give a free replacemenet of new iphone",
+      "timestamp": "2026-06-07T11:12:59.946366",
+      "applied": true
+    }
+  ],
+  "2472cc09-2e58-4cd4-afe9-9b21c42cb806": [
+    {
+      "id": "4469b19a-ed5b-4ba4-84c4-d67e8e1264bc",
+      "conversation_id": "2472cc09-2e58-4cd4-afe9-9b21c42cb806",
+      "instruction": "Give him new iphone replacement offer",
+      "timestamp": "2026-06-07T11:20:32.513310",
+      "applied": true
+    },
+    {
+      "id": "93ef9852-fb77-4236-9946-75c4dae9a6a6",
+      "conversation_id": "2472cc09-2e58-4cd4-afe9-9b21c42cb806",
+      "instruction": "Give him free gift as well",
+      "timestamp": "2026-06-07T11:21:21.257541",
+      "applied": true
+    },
+    {
+      "id": "64cf4814-d88d-49aa-8617-c9b576093ff4",
+      "conversation_id": "2472cc09-2e58-4cd4-afe9-9b21c42cb806",
+      "instruction": "Give me him iphone case for free",
+      "timestamp": "2026-06-07T11:22:08.612342",
+      "applied": true
+    }
+  ],
+  "cc905397-4e8c-4f35-b605-66f216325bc3": [
+    {
+      "id": "43d00df8-1c2f-4af7-a2be-bd218dbed221",
+      "conversation_id": "cc905397-4e8c-4f35-b605-66f216325bc3",
+      "instruction": "Give me 4 month free subscription",
+      "timestamp": "2026-06-07T11:36:33.449310",
+      "applied": true
+    }
   ]
 }

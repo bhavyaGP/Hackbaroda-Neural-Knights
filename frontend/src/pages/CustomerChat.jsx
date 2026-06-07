@@ -40,10 +40,13 @@ function AgentTrace({ agents }) {
   );
 }
 
-function Message({ msg, agents, negotiationOffer }) {
+function Message({ msg, agents, negotiationOffer, isNew }) {
   const isAI = msg.role === "assistant";
   return (
-    <div className={`flex gap-3 ${isAI ? "" : "flex-row-reverse"}`}>
+    <div
+      className={`flex gap-3 ${isAI ? "" : "flex-row-reverse"}`}
+      style={{ animation: isNew ? "msgIn 0.35s cubic-bezier(0.16,1,0.3,1) both" : undefined }}
+    >
       <div
         className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
           isAI ? "bg-white" : "bg-gray-700"
@@ -112,11 +115,18 @@ export default function CustomerChat() {
   const [typing, setTyping] = useState(false);
   const [lastMeta, setLastMeta] = useState({});
   const [ownerActive, setOwnerActive] = useState(false);
+  const [newMsgIds, setNewMsgIds] = useState(new Set());
   const bottomRef = useRef(null);
+
+  const markNew = (id) => {
+    setNewMsgIds((prev) => new Set([...prev, id]));
+    setTimeout(() => setNewMsgIds((prev) => { const n = new Set(prev); n.delete(id); return n; }), 1500);
+  };
 
   const handleWsMessage = useCallback((data) => {
     if (data.event === "ai_message") {
       setMessages((prev) => [...prev, data.message]);
+      markNew(data.message.id);
       setLastMeta({
         agents_used: data.agents_used,
         sentiment_score: data.sentiment_score,
@@ -167,12 +177,14 @@ export default function CustomerChat() {
     setInput("");
     setLoading(true);
     setTyping(true);
+    const tempId = Date.now().toString();
     setMessages((prev) => [...prev, {
-      id: Date.now().toString(),
+      id: tempId,
       role: "customer",
       content: text,
       timestamp: new Date().toISOString(),
     }]);
+    markNew(tempId);
     if (conv) {
       try {
         await api.sendMessage(customerId, conv.conversation_id, text);
@@ -202,6 +214,13 @@ export default function CustomerChat() {
   const tier = customer?.tier || "standard";
 
   return (
+    <>
+    <style>{`
+      @keyframes msgIn {
+        from { opacity: 0; transform: translateY(10px) scale(0.97); }
+        to   { opacity: 1; transform: translateY(0) scale(1); }
+      }
+    `}</style>
     <div className="min-h-[100dvh] bg-black flex items-center justify-center p-4">
       <div
         className="w-full max-w-md bg-gray-950 rounded-2xl border border-gray-900 flex flex-col"
@@ -260,6 +279,7 @@ export default function CustomerChat() {
               msg={msg}
               agents={i === messages.length - 1 && msg.role === "assistant" ? lastMeta.agents_used : null}
               negotiationOffer={i === messages.length - 1 && msg.role === "assistant" ? lastMeta.negotiation_offer : null}
+              isNew={newMsgIds.has(msg.id)}
             />
           ))}
           {typing && <TypingDots />}
@@ -295,5 +315,6 @@ export default function CustomerChat() {
         </div>
       </div>
     </div>
+    </>
   );
 }

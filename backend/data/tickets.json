@@ -98,5 +98,195 @@
     "priority": "high",
     "status": "open",
     "created_at": "2026-06-07T09:42:10.711963"
+  },
+  "081933f3-5a01-4b3a-a80b-7d962d3e4d7d": {
+    "id": "081933f3-5a01-4b3a-a80b-7d962d3e4d7d",
+    "customer_id": "C001",
+    "conversation_id": "fc16261f-dab6-4aa7-b30e-3c258d55a926",
+    "title": "Charging issue with iPhone 17 Pro",
+    "description": "My iPhone charger is not working. Actually, I purchased it last week but it is not charging the battery up to 100%.",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T10:19:00.524521"
+  },
+  "e803616a-8ec3-488e-8da8-112affa707a2": {
+    "id": "e803616a-8ec3-488e-8da8-112affa707a2",
+    "customer_id": "C001",
+    "conversation_id": "fc16261f-dab6-4aa7-b30e-3c258d55a926",
+    "title": "Repeat Charging Issue with iPhone 17 Pro",
+    "description": "Yeah, it will work but facing issues again and again I am not thinking of continuing my subscription.",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T10:19:32.431572"
+  },
+  "2de52390-4021-4551-b4ce-d0a84235ab7f": {
+    "id": "2de52390-4021-4551-b4ce-d0a84235ab7f",
+    "customer_id": "C001",
+    "conversation_id": "fc16261f-dab6-4aa7-b30e-3c258d55a926",
+    "title": "iPhone Charging Issue Follow-up",
+    "description": "No, I don't think 1 month. Free subscription will help me out. Do you have any other offers?",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T10:19:58.121381"
+  },
+  "c03a9a79-c0fc-48f5-b6e2-06c08a1ab19f": {
+    "id": "c03a9a79-c0fc-48f5-b6e2-06c08a1ab19f",
+    "customer_id": "C001",
+    "conversation_id": "d9b6ad33-8ab0-4210-9443-7cf3d72ed574",
+    "title": "YouTube Subscription Issue for Bhavya Prajapati",
+    "description": "No, actually think you are not working properly in my YouTube subscription plan.",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T10:30:07.204379"
+  },
+  "66cd1068-c097-454e-b21e-ec762f9b474a": {
+    "id": "66cd1068-c097-454e-b21e-ec762f9b474a",
+    "customer_id": "C001",
+    "conversation_id": "d9b6ad33-8ab0-4210-9443-7cf3d72ed574",
+    "title": "YouTube Subscription Issue",
+    "description": "I don't think things are really going well in the chat and moreover, I also want to cancel the subscription as I am facing the problem again, and again on the services.",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T10:30:34.140461"
+  },
+  "a8934123-9a39-4ab6-b318-6d214621c206": {
+    "id": "a8934123-9a39-4ab6-b318-6d214621c206",
+    "customer_id": "C001",
+    "conversation_id": "d9b6ad33-8ab0-4210-9443-7cf3d72ed574",
+    "title": "YouTube Subscription Issue",
+    "description": "Sure, I think YouTube is showing at even after paid my subscription fee.",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T10:31:05.561532"
+  },
+  "31652338-52d4-44fa-b895-8633ae686c2e": {
+    "id": "31652338-52d4-44fa-b895-8633ae686c2e",
+    "customer_id": "C001",
+    "conversation_id": "d9b6ad33-8ab0-4210-9443-7cf3d72ed574",
+    "title": "YouTube Subscription Issue",
+    "description": "I don't think it will work. Can you open me some discount on my subscription?",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T10:31:39.561423"
+  },
+  "7c7ff0e9-520d-4d1c-a51d-383da5401cb6": {
+    "id": "7c7ff0e9-520d-4d1c-a51d-383da5401cb6",
+    "customer_id": "C001",
+    "conversation_id": "d9b6ad33-8ab0-4210-9443-7cf3d72ed574",
+    "title": "Investigate YouTube Subscription Issue",
+    "description": "I guess it will work. But can you extend my free period for a little bit longer if you can do? So,",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T10:32:09.154029"
+  },
+  "0f5835fe-83c3-4839-b7e9-01986331e72a": {
+    "id": "0f5835fe-83c3-4839-b7e9-01986331e72a",
+    "customer_id": "C001",
+    "conversation_id": "d9b6ad33-8ab0-4210-9443-7cf3d72ed574",
+    "title": "YouTube Subscription Issue",
+    "description": "So, totally, how many months I will get in the subscription.",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T10:32:35.374268"
+  },
+  "44719b4c-9b02-4fde-8192-be27ed699f19": {
+    "id": "44719b4c-9b02-4fde-8192-be27ed699f19",
+    "customer_id": "C001",
+    "conversation_id": "d92a6c21-2180-4d07-a771-00112f0fce26",
+    "title": "YouTube Subscription Issue",
+    "description": "Well, things are not working. Well, I think the YouTube subscription plan that I have is still showing at even after I have paid, my complete subscription fee. The problem is recurring and I don't think I would like to continue my subscription.",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T10:55:41.211097"
+  },
+  "0299a581-7b4f-4993-81a1-0069fdd71d0f": {
+    "id": "0299a581-7b4f-4993-81a1-0069fdd71d0f",
+    "customer_id": "C001",
+    "conversation_id": "d92a6c21-2180-4d07-a771-00112f0fce26",
+    "title": "Investigate YouTube subscription payment issue",
+    "description": "Okay. You check. What is the problem and razor ticket?",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T10:56:21.757915"
+  },
+  "2534cc9c-8485-4381-9194-88c5a0a2b250": {
+    "id": "2534cc9c-8485-4381-9194-88c5a0a2b250",
+    "customer_id": "C001",
+    "conversation_id": "d92a6c21-2180-4d07-a771-00112f0fce26",
+    "title": "Investigate YouTube Subscription Payment Issue",
+    "description": "No, I don't think I would like the extension. Do you have any discount offers?",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T10:57:04.049698"
+  },
+  "1cf7daf1-4c9c-4f73-bd62-b42627534738": {
+    "id": "1cf7daf1-4c9c-4f73-bd62-b42627534738",
+    "customer_id": "C001",
+    "conversation_id": "d92a6c21-2180-4d07-a771-00112f0fce26",
+    "title": "Investigate YouTube subscription payment issue",
+    "description": "I think that is well but like have you raised my ticket and what were the previous tickets if you have raised any and apart from them? Can you extend somewhat else month to my subscription?",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T10:58:05.796299"
+  },
+  "21ade9b7-df8d-4620-88e0-be45d0975562": {
+    "id": "21ade9b7-df8d-4620-88e0-be45d0975562",
+    "customer_id": "C001",
+    "conversation_id": "1d603393-b4ee-4c3b-9d9a-753e406d12df",
+    "title": "iPhone 17 Pro charging issue - not charging to 100%",
+    "description": "Actually, my iPhone is not working properly. It is not getting charged up to 100%.",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T11:12:39.130677"
+  },
+  "0a58b7e8-2678-4c4b-95ae-2ba4f3a07784": {
+    "id": "0a58b7e8-2678-4c4b-95ae-2ba4f3a07784",
+    "customer_id": "C001",
+    "conversation_id": "1d603393-b4ee-4c3b-9d9a-753e406d12df",
+    "title": "iPhone 17 Pro Charging Not Reaching 100% with Error Messages",
+    "description": "Yes, I have been witnessing many error messages.",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T11:13:09.290533"
+  },
+  "39ee7437-f4a1-4e35-93f9-55aeaa2989ba": {
+    "id": "39ee7437-f4a1-4e35-93f9-55aeaa2989ba",
+    "customer_id": "C001",
+    "conversation_id": "1d603393-b4ee-4c3b-9d9a-753e406d12df",
+    "title": "iPhone 17 Pro persistent charging and error issues \u2014 replacement authorized",
+    "description": "Okay, okay I will send the screenshot but yeah, I don't think I will continue my subscription.",
+    "priority": "critical",
+    "status": "open",
+    "created_at": "2026-06-07T11:13:47.692444"
+  },
+  "305f1f6e-7c9e-4aa5-b45f-196d261a5a23": {
+    "id": "305f1f6e-7c9e-4aa5-b45f-196d261a5a23",
+    "customer_id": "C001",
+    "conversation_id": "2472cc09-2e58-4cd4-afe9-9b21c42cb806",
+    "title": "Urgent: Ongoing Battery Issues with iPhone 17 Pro",
+    "description": "I don't think everything is going perfectly. My iPhone is facing battery issues again and again.",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T11:20:24.103485"
+  },
+  "47cd8692-6a6d-4e4e-a2da-ab1722fa057a": {
+    "id": "47cd8692-6a6d-4e4e-a2da-ab1722fa057a",
+    "customer_id": "C001",
+    "conversation_id": "2472cc09-2e58-4cd4-afe9-9b21c42cb806",
+    "title": "Replacement request and subscription extension options for Bhavya",
+    "description": "Okay. The replacement sounds good. But apart from that, what options can you give me to extend my subscription?",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T11:21:43.658585"
+  },
+  "53918bcd-21c0-4e42-8b8b-cbbda13e656a": {
+    "id": "53918bcd-21c0-4e42-8b8b-cbbda13e656a",
+    "customer_id": "C001",
+    "conversation_id": "cc905397-4e8c-4f35-b605-66f216325bc3",
+    "title": "QuicklearnAI subscription issue",
+    "description": "Okay, I am actually having problem with my quicklane AI subscription.",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T11:36:23.967125"
   }
 }

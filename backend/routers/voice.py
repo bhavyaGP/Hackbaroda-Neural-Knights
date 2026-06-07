@@ -48,7 +48,7 @@ def _find_customer_by_phone(from_number: str):
     return None
 
 
-def _gather_twiml(action_url: str, prompt: str, fallback: str = "Thank you for calling. Goodbye!") -> str:
+def _gather_twiml(action_url: str, prompt: str, fallback: str = "Still there? Take your time, I'm listening.") -> str:
     safe_url = action_url.replace("&", "&amp;")  # & is invalid in XML attributes
     return f"""<?xml version="1.0" encoding="UTF-8"?>
 <Response>
@@ -135,14 +135,25 @@ async def voice_gather(
         twiml = _gather_twiml(action, "Sorry, I didn't quite catch that. Go ahead whenever you're ready.")
         return Response(content=twiml, media_type="application/xml")
 
-    # Detect hangup intent
-    if any(w in speech.lower() for w in ["goodbye", "bye", "hang up", "end call", "that's all", "no thank you", "nothing else"]):
-        history = store.get_messages(conv_id)
-        customer = store.get_customer(customer_id) or {"name": "there"}
+    # Detect EXPLICIT customer hangup intent — very narrow list to avoid false positives
+    # Only fire when customer clearly wants to end the call, not mid-conversation phrases
+    speech_lower = speech.lower().strip()
+    explicit_hangup = any(
+        phrase in speech_lower
+        for phrase in [
+            "hang up", "end the call", "disconnect", "i want to hang up",
+            "i'm done", "i'm good, goodbye", "goodbye, thank you", "okay goodbye",
+            "that's all, goodbye", "i'll let you go",
+        ]
+    )
+    if explicit_hangup:
+        print(f"[VOICE] Customer requested hangup: {speech!r}")
+        history  = store.get_messages(conv_id)
+        customer_rec = store.get_customer(customer_id) or {"name": "there"}
         try:
-            closing = await generate_call_summary(history, customer.get("name", "there"))
+            closing = await generate_call_summary(history, customer_rec.get("name", "there"))
         except Exception:
-            closing = "It was great speaking with you. Don't hesitate to reach out if anything else comes up. Take care!"
+            closing = "Glad we could sort that out. I'm here if you ever need anything else."
         store.close_conversation(conv_id)
         await ws_manager.broadcast_conversation_update(conv_id, "conversation_closed", {})
         twiml = f"""<?xml version="1.0" encoding="UTF-8"?>
@@ -157,13 +168,13 @@ async def voice_gather(
         "products": [], "subscription_status": "active", "lifetime_value": 0.0,
     }
 
-    # Store customer speech as message
-    store.add_message(conv_id, "customer", speech)
+    # Store customer speech — capture ref for live broadcast
+    customer_voice_msg = store.add_message(conv_id, "customer", speech)
     history = store.get_messages(conv_id)[:-1]  # exclude the one just added
 
-    # Check for owner intervention
-    pending_iv = store.get_pending_intervention(conv_id)
-    owner_instruction = pending_iv["instruction"] if pending_iv else None
+    # Get full intervention history (new + already applied)
+    owner_interventions = store.get_all_interventions(conv_id)
+    new_ivs = owner_interventions.get("new", [])
 
     try:
         agent_resp = await process_message(
@@ -172,19 +183,20 @@ async def voice_gather(
             customer_message=speech,
             conversation_history=history,
             customer_profile=customer,
-            owner_instruction=owner_instruction,
+            owner_interventions=owner_interventions,
             channel="voice",
         )
 
-        if pending_iv:
-            store.mark_applied(conv_id, pending_iv["id"])
-            print(f"[VOICE] Owner instruction applied: {owner_instruction!r}")
+        store.mark_all_pending_applied(conv_id)
+        if new_ivs:
+            print(f"[VOICE] Owner instructions applied: {[iv['instruction'] for iv in new_ivs]}")
 
         ai_text = agent_resp.response
         print(f"[VOICE] Intent={agent_resp.intent}  Sentiment={agent_resp.sentiment_score:.2f}  Churn={agent_resp.churn_risk:.2f}")
         print(f"[VOICE] Agents: {', '.join(agent_resp.agents_used)}")
         print(f"[VOICE] AI → {ai_text[:120]}{'...' if len(ai_text) > 120 else ''}")
-        store.add_message(conv_id, "assistant", ai_text, {
+        # Store AI response — customer msg already stored above
+        ai_voice_msg = store.add_message(conv_id, "assistant", ai_text, {
             "agents_used": agent_resp.agents_used,
             "sentiment_score": agent_resp.sentiment_score,
             "churn_risk": agent_resp.churn_risk,
@@ -216,8 +228,9 @@ async def voice_gather(
             "intent": agent_resp.intent,
             "agents_used": agent_resp.agents_used,
             "last_message": speech[:80],
+            "new_messages": [customer_voice_msg, ai_voice_msg],
             "negotiation_offer": agent_resp.actions.negotiation_offer.model_dump() if agent_resp.actions.negotiation_offer else None,
-            "owner_instruction_applied": bool(owner_instruction),
+            "owner_instruction_applied": bool(new_ivs),
         }))
 
         # Auto-create ticket on voice if needed
@@ -236,7 +249,7 @@ async def voice_gather(
     twiml = _gather_twiml(
         action,
         _clean_for_tts(ai_text),
-        fallback="I'm still here if you need anything else.",
+        fallback="I'm still here — go ahead whenever you're ready.",
     )
     return Response(content=twiml, media_type="application/xml")
 

@@ -91,11 +91,121 @@
     "id": "eac6d346-9a1e-46aa-8280-83b3bf3e69b9",
     "customer_id": "C001",
     "channel": "voice",
-    "status": "active",
+    "status": "closed",
     "sentiment_score": 0.0,
     "churn_risk": 0.0,
     "intent": "unknown",
     "created_at": "2026-06-07T09:56:00.624518",
-    "updated_at": "2026-06-07T09:56:00.624538"
+    "updated_at": "2026-06-07T10:20:19.216692"
+  },
+  "fc16261f-dab6-4aa7-b30e-3c258d55a926": {
+    "id": "fc16261f-dab6-4aa7-b30e-3c258d55a926",
+    "customer_id": "C001",
+    "channel": "voice",
+    "status": "closed",
+    "sentiment_score": -0.5,
+    "churn_risk": 0.6,
+    "intent": "cancellation",
+    "created_at": "2026-06-07T10:18:17.863874",
+    "updated_at": "2026-06-07T10:20:19.219695"
+  },
+  "d9b6ad33-8ab0-4210-9443-7cf3d72ed574": {
+    "id": "d9b6ad33-8ab0-4210-9443-7cf3d72ed574",
+    "customer_id": "C001",
+    "channel": "voice",
+    "status": "closed",
+    "sentiment_score": 0.4,
+    "churn_risk": 0.55,
+    "intent": "cancellation",
+    "created_at": "2026-06-07T10:29:35.351875",
+    "updated_at": "2026-06-07T10:32:59.161314"
+  },
+  "bf5adde7-6a4b-43de-bd17-0e9149fef14d": {
+    "id": "bf5adde7-6a4b-43de-bd17-0e9149fef14d",
+    "customer_id": "C001",
+    "channel": "voice",
+    "status": "closed",
+    "sentiment_score": 0.0,
+    "churn_risk": 0.0,
+    "intent": "unknown",
+    "created_at": "2026-06-07T10:35:03.431092",
+    "updated_at": "2026-06-07T10:36:05.612581"
+  },
+  "d92a6c21-2180-4d07-a771-00112f0fce26": {
+    "id": "d92a6c21-2180-4d07-a771-00112f0fce26",
+    "customer_id": "C001",
+    "channel": "voice",
+    "status": "closed",
+    "sentiment_score": -0.5,
+    "churn_risk": 0.65,
+    "intent": "cancellation",
+    "created_at": "2026-06-07T10:54:55.622497",
+    "updated_at": "2026-06-07T10:58:05.790297"
+  },
+  "1d603393-b4ee-4c3b-9d9a-753e406d12df": {
+    "id": "1d603393-b4ee-4c3b-9d9a-753e406d12df",
+    "customer_id": "C001",
+    "channel": "voice",
+    "status": "closed",
+    "sentiment_score": -0.4,
+    "churn_risk": 0.92,
+    "intent": "cancellation",
+    "created_at": "2026-06-07T11:11:55.446310",
+    "updated_at": "2026-06-07T11:13:50.582791"
+  },
+  "8ce0bde1-516a-484c-b0c5-1fc61425cbb9": {
+    "id": "8ce0bde1-516a-484c-b0c5-1fc61425cbb9",
+    "customer_id": "C001",
+    "channel": "voice",
+    "status": "closed",
+    "sentiment_score": 0.0,
+    "churn_risk": 0.0,
+    "intent": "unknown",
+    "created_at": "2026-06-07T11:18:36.762737",
+    "updated_at": "2026-06-07T11:19:08.853680"
+  },
+  "2595579b-be44-4526-bf37-fb8d6673360e": {
+    "id": "2595579b-be44-4526-bf37-fb8d6673360e",
+    "customer_id": "C001",
+    "channel": "voice",
+    "status": "closed",
+    "sentiment_score": 0.0,
+    "churn_risk": 0.0,
+    "intent": "unknown",
+    "created_at": "2026-06-07T11:18:49.153767",
+    "updated_at": "2026-06-07T11:19:08.859977"
+  },
+  "2472cc09-2e58-4cd4-afe9-9b21c42cb806": {
+    "id": "2472cc09-2e58-4cd4-afe9-9b21c42cb806",
+    "customer_id": "C001",
+    "channel": "voice",
+    "status": "closed",
+    "sentiment_score": -0.4,
+    "churn_risk": 0.6,
+    "intent": "cancellation",
+    "created_at": "2026-06-07T11:19:44.760170",
+    "updated_at": "2026-06-07T11:22:38.748194"
+  },
+  "8c4ca256-6ac2-4926-8f7d-e6a3ccb9f08a": {
+    "id": "8c4ca256-6ac2-4926-8f7d-e6a3ccb9f08a",
+    "customer_id": "C004",
+    "channel": "voice",
+    "status": "closed",
+    "sentiment_score": 0.0,
+    "churn_risk": 0.0,
+    "intent": "unknown",
+    "created_at": "2026-06-07T11:26:36.432028",
+    "updated_at": "2026-06-07T11:27:17.199482"
+  },
+  "cc905397-4e8c-4f35-b605-66f216325bc3": {
+    "id": "cc905397-4e8c-4f35-b605-66f216325bc3",
+    "customer_id": "C001",
+    "channel": "voice",
+    "status": "closed",
+    "sentiment_score": -0.5,
+    "churn_risk": 0.7,
+    "intent": "cancellation",
+    "created_at": "2026-06-07T11:35:27.508644",
+    "updated_at": "2026-06-07T11:37:43.189508"
   }
 }
