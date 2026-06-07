@@ -20,5 +20,49 @@
       "churn_risk": 0.8,
       "intent": "technical"
     }
+  ],
+  "9b886730-c253-4431-9126-cab3b727f3b5": [
+    {
+      "timestamp": "2026-06-07T09:39:42.530386",
+      "sentiment_score": -0.7,
+      "churn_risk": 0.65,
+      "intent": "cancellation"
+    },
+    {
+      "timestamp": "2026-06-07T09:40:17.549282",
+      "sentiment_score": -0.8,
+      "churn_risk": 0.65,
+      "intent": "cancellation"
+    },
+    {
+      "timestamp": "2026-06-07T09:40:31.375955",
+      "sentiment_score": -0.6,
+      "churn_risk": 0.65,
+      "intent": "cancellation"
+    },
+    {
+      "timestamp": "2026-06-07T09:40:56.263521",
+      "sentiment_score": -0.6,
+      "churn_risk": 0.8,
+      "intent": "cancellation"
+    },
+    {
+      "timestamp": "2026-06-07T09:41:20.532358",
+      "sentiment_score": -0.3,
+      "churn_risk": 0.6,
+      "intent": "cancellation"
+    },
+    {
+      "timestamp": "2026-06-07T09:41:46.442083",
+      "sentiment_score": 0.2,
+      "churn_risk": 0.55,
+      "intent": "technical"
+    },
+    {
+      "timestamp": "2026-06-07T09:42:10.709897",
+      "sentiment_score": -0.3,
+      "churn_risk": 0.7,
+      "intent": "cancellation"
+    }
   ]
 }

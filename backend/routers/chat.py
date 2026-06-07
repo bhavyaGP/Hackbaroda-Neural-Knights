@@ -17,11 +17,9 @@ async def start_conversation(body: ConversationCreate):
 
     conv = store.create_conversation(body.customer_id, body.channel)
 
-    # Greeting message
-    greeting = (
-        f"Hello {customer['name']}! I'm Aria, your dedicated support specialist. "
-        f"How can I help you today?"
-    )
+    # Greeting message - use first name, natural tone
+    first_name = customer['name'].split()[0]
+    greeting = f"Hey {first_name}, I'm Aria from support. What can I help you with today?"
     store.add_message(conv["id"], "assistant", greeting)
 
     await ws_manager.broadcast_conversation_update(conv["id"], "conversation_started", {

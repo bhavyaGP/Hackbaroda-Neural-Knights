@@ -28,5 +28,75 @@
     "priority": "high",
     "status": "open",
     "created_at": "2026-06-07T09:00:03.915232"
+  },
+  "79992b3a-4e6a-4058-ac2f-9530efc7ffe3": {
+    "id": "79992b3a-4e6a-4058-ac2f-9530efc7ffe3",
+    "customer_id": "C001",
+    "conversation_id": "9b886730-c253-4431-9126-cab3b727f3b5",
+    "title": "iPhone 17 Charging Issues",
+    "description": "I don't think so the iPhone 17 that I purchased is working accurately it is giving charging issues and the batteries also draining very quickly. I don't expect this from a newly purchased product. I want to cancel the subscription",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T09:39:42.530386"
+  },
+  "c9af7b32-13ea-477a-bcbd-cd193da54a92": {
+    "id": "c9af7b32-13ea-477a-bcbd-cd193da54a92",
+    "customer_id": "C001",
+    "conversation_id": "9b886730-c253-4431-9126-cab3b727f3b5",
+    "title": "Charging issue with iPhone 17 Pro",
+    "description": "Yes, definitely. I would like to create a ticket and also the problem remains whenever I keep it in the charging, even the power is on the battery is not getting charged up to 100%.",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T09:40:17.550816"
+  },
+  "3e439842-b0d1-45de-8bba-3ad78bd59b4a": {
+    "id": "3e439842-b0d1-45de-8bba-3ad78bd59b4a",
+    "customer_id": "C001",
+    "conversation_id": "9b886730-c253-4431-9126-cab3b727f3b5",
+    "title": "Charging issue with iPhone 17 Pro",
+    "description": "None of that.",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T09:40:31.376957"
+  },
+  "2d7adc93-3a32-4f7d-bc78-572880ba1671": {
+    "id": "2d7adc93-3a32-4f7d-bc78-572880ba1671",
+    "customer_id": "C001",
+    "conversation_id": "9b886730-c253-4431-9126-cab3b727f3b5",
+    "title": "Charging issue with iPhone 17 Pro",
+    "description": "Sorry, but I am thinking of canceling my subscription for the next month.",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T09:40:56.265516"
+  },
+  "d7005679-656c-46e2-a921-aba54112496d": {
+    "id": "d7005679-656c-46e2-a921-aba54112496d",
+    "customer_id": "C001",
+    "conversation_id": "9b886730-c253-4431-9126-cab3b727f3b5",
+    "title": "iPhone 17 Pro Charging Issue",
+    "description": "I don't know.",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T09:41:20.536133"
+  },
+  "01451f2f-ba5e-452a-bea4-569da3ae858d": {
+    "id": "01451f2f-ba5e-452a-bea4-569da3ae858d",
+    "customer_id": "C001",
+    "conversation_id": "9b886730-c253-4431-9126-cab3b727f3b5",
+    "title": "iPhone 17 Pro Charging Issue",
+    "description": "Yeah, I will raise the ticket for the same and I want a proper repair from your side.",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T09:41:46.445086"
+  },
+  "a4cc7877-ca2b-4219-bb12-416f530e7970": {
+    "id": "a4cc7877-ca2b-4219-bb12-416f530e7970",
+    "customer_id": "C001",
+    "conversation_id": "9b886730-c253-4431-9126-cab3b727f3b5",
+    "title": "iPhone Charging Issue",
+    "description": "And I'm thinking of canceling, the subscription, do you get it?",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T09:42:10.711963"
   }
 }

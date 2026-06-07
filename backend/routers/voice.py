@@ -92,7 +92,8 @@ async def voice_inbound(
     conv = store.create_conversation(customer_id, "voice")
     conv_id = conv["id"]
 
-    greeting = f"Hello {customer_name}! I'm Aria, your dedicated support specialist. I have your account pulled up. How can I help you today?"
+    first_name = customer_name.split()[0] if customer_name != "there" else "there"
+    greeting = f"Hey {first_name}, it's Aria from support. Good to hear from you. What's going on today?"
 
     store.add_message(conv_id, "assistant", greeting)
     print(f"\n[VOICE] Inbound call from {From} → matched customer: {customer_id} ({customer_name})")
@@ -131,16 +132,16 @@ async def voice_gather(
     if not speech:
         print("[VOICE] Empty speech — re-prompting")
         action = f"/api/voice/gather?customer_id={customer_id}&conv_id={conv_id}"
-        twiml = _gather_twiml(action, "I'm sorry, I didn't catch that. Could you please repeat?")
+        twiml = _gather_twiml(action, "Sorry, I didn't quite catch that. Go ahead whenever you're ready.")
         return Response(content=twiml, media_type="application/xml")
 
     # Detect hangup intent
-    if any(w in speech.lower() for w in ["goodbye", "bye", "hang up", "end call", "that's all", "no thank you"]):
+    if any(w in speech.lower() for w in ["goodbye", "bye", "hang up", "end call", "that's all", "no thank you", "nothing else"]):
         store.close_conversation(conv_id)
         await ws_manager.broadcast_conversation_update(conv_id, "conversation_closed", {})
         twiml = f"""<?xml version="1.0" encoding="UTF-8"?>
 <Response>
-    <Say voice="{VOICE}">Thank you for calling. I hope we resolved everything for you. Have a wonderful day!</Say>
+    <Say voice="{VOICE}">Sounds good. Take care, and don't hesitate to reach out if anything else comes up.</Say>
     <Hangup/>
 </Response>"""
         return Response(content=twiml, media_type="application/xml")
@@ -166,6 +167,7 @@ async def voice_gather(
             conversation_history=history,
             customer_profile=customer,
             owner_instruction=owner_instruction,
+            channel="voice",
         )
 
         if pending_iv:
@@ -222,13 +224,13 @@ async def voice_gather(
             )
 
     except Exception as e:
-        ai_text = "I apologize, I'm experiencing a technical issue. Let me make a note of your concern and have a specialist follow up with you shortly."
+        ai_text = "Sorry, I hit a snag on my end. I've flagged this and someone from the team will follow up with you shortly."
 
     action = f"/api/voice/gather?customer_id={customer_id}&conv_id={conv_id}"
     twiml = _gather_twiml(
         action,
         _clean_for_tts(ai_text),
-        fallback="Thank you for your patience. Is there anything else I can help you with?",
+        fallback="I'm still here if you need anything else.",
     )
     return Response(content=twiml, media_type="application/xml")
 
@@ -338,12 +340,8 @@ async def outbound_answer(
         conv = store.create_conversation(customer_id, "voice")
 
     conv_id = conv["id"]
-    greeting = (
-        f"Hello {customer['name']}! This is Aria from support. "
-        f"Thank you for taking our call. "
-        f"I have your account pulled up and I'm here to assist you. "
-        f"How can I help you today?"
-    )
+    first_name = customer['name'].split()[0]
+    greeting = f"Hey {first_name}, it's Aria calling from support. I wanted to personally check in and see if everything's going okay with your account. What's on your mind?"
     store.add_message(conv_id, "assistant", greeting)
     print(f"\n[VOICE] Outbound answered — customer: {customer_id} ({customer['name']})")
     print(f"[VOICE] Conv ID: {conv_id}")

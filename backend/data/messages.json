@@ -144,5 +144,169 @@
       "content": "Outbound call initiated to +918780034261 \u2014 SID: CA4eab7c7d1be964389bc9eeb2a44eaa58",
       "timestamp": "2026-06-07T09:00:46.521587"
     }
+  ],
+  "9b886730-c253-4431-9126-cab3b727f3b5": [
+    {
+      "id": "55553574-01ab-4c11-9da3-710e109b0265",
+      "conversation_id": "9b886730-c253-4431-9126-cab3b727f3b5",
+      "role": "system",
+      "content": "Outbound call initiated to +918780034261 \u2014 SID: CA399cb9754e3b36090d684472a9993af7",
+      "timestamp": "2026-06-07T09:38:56.455692"
+    },
+    {
+      "id": "bb39b757-60d5-40f2-a8e6-b72ae28fdbfc",
+      "conversation_id": "9b886730-c253-4431-9126-cab3b727f3b5",
+      "role": "assistant",
+      "content": "Hey Bhavya, it's Aria calling from support. I wanted to personally check in and see if everything's going okay with your account. What's on your mind?",
+      "timestamp": "2026-06-07T09:39:12.224641"
+    },
+    {
+      "id": "d2906419-033f-4fe8-80f5-858f8d6d57e4",
+      "conversation_id": "9b886730-c253-4431-9126-cab3b727f3b5",
+      "role": "customer",
+      "content": "I don't think so the iPhone 17 that I purchased is working accurately it is giving charging issues and the batteries also draining very quickly. I don't expect this from a newly purchased product. I want to cancel the subscription",
+      "timestamp": "2026-06-07T09:39:37.117862"
+    },
+    {
+      "id": "ffbe777c-a0e3-4d0b-8ee0-116c490394d8",
+      "conversation_id": "9b886730-c253-4431-9126-cab3b727f3b5",
+      "role": "assistant",
+      "content": "That sounds frustrating, and honestly, you shouldn't be having these issues with a new device. Let's get to the bottom of this charging problem first, and I can help you figure out the best options going forward. Would you like me to create a ticket for the technical team to assist with the iPhone issue?",
+      "timestamp": "2026-06-07T09:39:42.529389",
+      "agents_used": [
+        "sentiment",
+        "negotiation",
+        "escalation"
+      ],
+      "sentiment_score": -0.7,
+      "churn_risk": 0.65
+    },
+    {
+      "id": "1ffd933c-7c37-40f4-a74e-a698896ebee3",
+      "conversation_id": "9b886730-c253-4431-9126-cab3b727f3b5",
+      "role": "customer",
+      "content": "Yes, definitely. I would like to create a ticket and also the problem remains whenever I keep it in the charging, even the power is on the battery is not getting charged up to 100%.",
+      "timestamp": "2026-06-07T09:40:12.537590"
+    },
+    {
+      "id": "e1890a28-9ff3-423c-bd4d-d04cb19bb67d",
+      "conversation_id": "9b886730-c253-4431-9126-cab3b727f3b5",
+      "role": "assistant",
+      "content": "I understand how concerning that is. I'll create a high-priority ticket for the technical team to look into the charging issue with your iPhone. In the meantime, I'll also note that the battery isn't charging fully even when plugged in. You should hear back from them soon. Is there anything else I can assist you with?",
+      "timestamp": "2026-06-07T09:40:17.546785",
+      "agents_used": [
+        "SENTIMENT_AGENT",
+        "RESOLUTION_AGENT",
+        "ESCALATION_AGENT"
+      ],
+      "sentiment_score": -0.8,
+      "churn_risk": 0.65
+    },
+    {
+      "id": "10ac72a5-d6bd-44f5-8047-a5eb4dc4368b",
+      "conversation_id": "9b886730-c253-4431-9126-cab3b727f3b5",
+      "role": "customer",
+      "content": "None of that.",
+      "timestamp": "2026-06-07T09:40:24.114901"
+    },
+    {
+      "id": "83648f8d-dba0-4833-bd79-36c1b331e7ee",
+      "conversation_id": "9b886730-c253-4431-9126-cab3b727f3b5",
+      "role": "assistant",
+      "content": "Got it, I'll take care of that ticket for you. You'll be updated shortly. If anything else comes up or if you have more questions, just let me know. Talk to you soon!",
+      "timestamp": "2026-06-07T09:40:31.371415",
+      "agents_used": [
+        "memory",
+        "sentiment",
+        "resolution",
+        "escalation"
+      ],
+      "sentiment_score": -0.6,
+      "churn_risk": 0.65
+    },
+    {
+      "id": "9d86ec60-fa05-4a29-9796-ad7d016b0878",
+      "conversation_id": "9b886730-c253-4431-9126-cab3b727f3b5",
+      "role": "customer",
+      "content": "Sorry, but I am thinking of canceling my subscription for the next month.",
+      "timestamp": "2026-06-07T09:40:51.463919"
+    },
+    {
+      "id": "98e29378-1964-44e6-be76-3ef5e851b7f0",
+      "conversation_id": "9b886730-c253-4431-9126-cab3b727f3b5",
+      "role": "assistant",
+      "content": "I understand this has been a tough experience for you. Before we go down the cancellation route, let\u2019s explore what we can do to resolve the issues with your iPhone. I really want to help you keep your subscription. If you're still considering it, I can offer a month free while we sort this out. What do you think?",
+      "timestamp": "2026-06-07T09:40:56.256007",
+      "agents_used": [
+        "sentiment",
+        "negotiation"
+      ],
+      "sentiment_score": -0.6,
+      "churn_risk": 0.8
+    },
+    {
+      "id": "24215aa6-5ec4-4a3d-a833-970ab0fa1a9a",
+      "conversation_id": "9b886730-c253-4431-9126-cab3b727f3b5",
+      "role": "customer",
+      "content": "I don't know.",
+      "timestamp": "2026-06-07T09:41:16.261011"
+    },
+    {
+      "id": "5e6d0170-a75a-4176-9eca-9b21594410c8",
+      "conversation_id": "9b886730-c253-4431-9126-cab3b727f3b5",
+      "role": "assistant",
+      "content": "I get it, it's a lot to consider. If you're willing, let's focus on fixing the charging issue first. I really want to ensure you're satisfied with the service and your devices. How does that sound?",
+      "timestamp": "2026-06-07T09:41:20.525904",
+      "agents_used": [
+        "sentiment",
+        "negotiation",
+        "owner_intervention"
+      ],
+      "sentiment_score": -0.3,
+      "churn_risk": 0.6
+    },
+    {
+      "id": "61763f4f-e0a1-4b0e-b940-ff236cbf98ae",
+      "conversation_id": "9b886730-c253-4431-9126-cab3b727f3b5",
+      "role": "customer",
+      "content": "Yeah, I will raise the ticket for the same and I want a proper repair from your side.",
+      "timestamp": "2026-06-07T09:41:41.730334"
+    },
+    {
+      "id": "4029a0b5-f93e-4b42-9ffa-71c19b73fd0a",
+      "conversation_id": "9b886730-c253-4431-9126-cab3b727f3b5",
+      "role": "assistant",
+      "content": "Absolutely, I'll raise that high-priority ticket for you right now so the technical team can provide proper support for your iPhone charging issue. You'll receive updates soon, and I'm here if you have any more concerns in the meantime.",
+      "timestamp": "2026-06-07T09:41:46.435028",
+      "agents_used": [
+        "memory",
+        "sentiment",
+        "resolution",
+        "negotiation"
+      ],
+      "sentiment_score": 0.2,
+      "churn_risk": 0.55
+    },
+    {
+      "id": "21cbb889-b67c-4166-a7cc-498150f19269",
+      "conversation_id": "9b886730-c253-4431-9126-cab3b727f3b5",
+      "role": "customer",
+      "content": "And I'm thinking of canceling, the subscription, do you get it?",
+      "timestamp": "2026-06-07T09:42:05.801628"
+    },
+    {
+      "id": "7fe7d4d5-2186-41a4-a4ad-19e5d31fa99a",
+      "conversation_id": "9b886730-c253-4431-9126-cab3b727f3b5",
+      "role": "assistant",
+      "content": "I understand you're considering cancellation, and I want to help. If we can resolve the charging issue quickly, I believe you'll feel better about staying with us. I can offer you a month free while we work on this. How does that sound?",
+      "timestamp": "2026-06-07T09:42:10.703391",
+      "agents_used": [
+        "sentiment_agent",
+        "negotiation_agent",
+        "negotiation"
+      ],
+      "sentiment_score": -0.3,
+      "churn_risk": 0.7
+    }
   ]
 }
