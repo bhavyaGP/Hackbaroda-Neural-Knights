@@ -1,0 +1,35 @@
+{
+  "8ebb9a6f-d017-44be-95cd-31fb5c916d43": {
+    "id": "8ebb9a6f-d017-44be-95cd-31fb5c916d43",
+    "customer_id": "C001",
+    "channel": "chat",
+    "status": "active",
+    "sentiment_score": 0.0,
+    "churn_risk": 0.0,
+    "intent": "unknown",
+    "created_at": "2026-06-07T07:52:28.436826",
+    "updated_at": "2026-06-07T07:52:28.436826"
+  },
+  "69a8ad12-abda-4f02-bc1b-d575ef71f30e": {
+    "id": "69a8ad12-abda-4f02-bc1b-d575ef71f30e",
+    "customer_id": "C001",
+    "channel": "chat",
+    "status": "active",
+    "sentiment_score": 0.0,
+    "churn_risk": 0.0,
+    "intent": "unknown",
+    "created_at": "2026-06-07T07:52:28.442038",
+    "updated_at": "2026-06-07T07:52:28.442038"
+  },
+  "605fa3fe-2898-4525-9405-9f3667b9d763": {
+    "id": "605fa3fe-2898-4525-9405-9f3667b9d763",
+    "customer_id": "C001",
+    "channel": "chat",
+    "status": "active",
+    "sentiment_score": -0.8,
+    "churn_risk": 0.9,
+    "intent": "cancellation",
+    "created_at": "2026-06-07T07:52:42.329409",
+    "updated_at": "2026-06-07T07:53:06.253636"
+  }
+}

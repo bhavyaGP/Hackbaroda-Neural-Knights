@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+openai
+hindsight-client
+python-dotenv
+httpx
+pydantic>=2.0
+python-multipart
+aiofiles
+deepgram-sdk

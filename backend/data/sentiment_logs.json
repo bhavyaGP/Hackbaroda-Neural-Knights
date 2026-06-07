@@ -1,0 +1,10 @@
+{
+  "605fa3fe-2898-4525-9405-9f3667b9d763": [
+    {
+      "timestamp": "2026-06-07T07:53:06.255634",
+      "sentiment_score": -0.8,
+      "churn_risk": 0.9,
+      "intent": "cancellation"
+    }
+  ]
+}

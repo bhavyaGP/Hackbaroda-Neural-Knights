@@ -1,0 +1,12 @@
+{
+  "78a594eb-f616-49c1-a569-0a934f8d71d5": {
+    "id": "78a594eb-f616-49c1-a569-0a934f8d71d5",
+    "customer_id": "C001",
+    "conversation_id": "605fa3fe-2898-4525-9405-9f3667b9d763",
+    "title": "Urgent: Double Charge and API Gateway Failure",
+    "description": "I am extremely frustrated! I got charged twice this month again and my API Gateway is still failing. I am seriously thinking of cancelling my subscription.",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T07:53:06.256635"
+  }
+}
