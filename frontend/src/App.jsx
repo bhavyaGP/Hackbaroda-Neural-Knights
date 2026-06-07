@@ -82,7 +82,6 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
     return pages
   }
 
-export default function App() {
   return (
     <div className="pagination">
       <button
