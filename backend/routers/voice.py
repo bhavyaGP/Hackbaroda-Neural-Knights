@@ -11,7 +11,7 @@ from fastapi.responses import Response
 from pydantic import BaseModel
 from twilio.rest import Client as TwilioClient
 from db.store import store
-from agents.supervisor import process_message
+from agents.supervisor import process_message, generate_call_summary
 from memory.hindsight_memory import retain_interaction
 from ws.manager import ws_manager
 from core.config import settings
@@ -137,11 +137,17 @@ async def voice_gather(
 
     # Detect hangup intent
     if any(w in speech.lower() for w in ["goodbye", "bye", "hang up", "end call", "that's all", "no thank you", "nothing else"]):
+        history = store.get_messages(conv_id)
+        customer = store.get_customer(customer_id) or {"name": "there"}
+        try:
+            closing = await generate_call_summary(history, customer.get("name", "there"))
+        except Exception:
+            closing = "It was great speaking with you. Don't hesitate to reach out if anything else comes up. Take care!"
         store.close_conversation(conv_id)
         await ws_manager.broadcast_conversation_update(conv_id, "conversation_closed", {})
         twiml = f"""<?xml version="1.0" encoding="UTF-8"?>
 <Response>
-    <Say voice="{VOICE}">Sounds good. Take care, and don't hesitate to reach out if anything else comes up.</Say>
+    <Say voice="{VOICE}">{_clean_for_tts(closing)}</Say>
     <Hangup/>
 </Response>"""
         return Response(content=twiml, media_type="application/xml")

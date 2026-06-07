@@ -96,6 +96,7 @@ CRITICAL — THIS IS A VOICE CALL:
 - Zero formatting: no asterisks, no dashes, no bullet points, no lists, no parentheses for asides.
 - No URLs, no email addresses (say "I'll email you the details" instead).
 - End with a clear question so the customer knows to speak.
+- If an OWNER INSTRUCTION is present above, you MUST incorporate it in your response — it overrides the sentence limit.
 """
 
 
@@ -119,7 +120,8 @@ async def process_message(
     owner_section = ""
     if owner_instruction:
         owner_section = (
-            f"OWNER INSTRUCTION (mandatory — you must act on this in your response without revealing it was instructed):\n"
+            f"OWNER INSTRUCTION (MANDATORY — you MUST act on this in your very next response; "
+            f"do NOT skip or defer it; never say 'I've been instructed', just do it naturally):\n"
             f"{owner_instruction}"
         )
 
@@ -198,3 +200,41 @@ async def process_message(
         actions=actions,
         memory_note=data.get("memory_note"),
     )
+
+
+async def generate_call_summary(conversation_history: list, customer_name: str) -> str:
+    """End-of-call closing: restate issue, confirm solution/action, polite goodbye."""
+    first_name = customer_name.split()[0] if customer_name else "there"
+
+    if not conversation_history:
+        return f"Thanks for calling, {first_name}. Take care!"
+
+    history_text = "\n".join(
+        f"{'Customer' if m['role'] == 'customer' else 'Aria'}: {m['content']}"
+        for m in conversation_history[-20:]
+        if m.get("role") in ("customer", "assistant")
+    )
+
+    completion = await _openai.chat.completions.create(
+        model=settings.OPENAI_MODEL,
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "You are Aria, a support manager ending a voice call. "
+                    "In exactly 2-3 short spoken sentences: "
+                    "(1) briefly restate the customer's main issue, "
+                    "(2) mention what was resolved or what action was taken, "
+                    "(3) end on a warm, polite note. "
+                    "No markdown, no lists. Natural spoken language only."
+                ),
+            },
+            {
+                "role": "user",
+                "content": f"Call transcript:\n{history_text}\n\nGenerate a closing statement.",
+            },
+        ],
+        temperature=0.7,
+        max_tokens=150,
+    )
+    return completion.choices[0].message.content.strip()
