@@ -57,6 +57,17 @@ export const api = {
     const res = await fetch(`${BASE}/api/customers/${customer_id}/profile`);
     return res.json();
   },
+
+  async callCustomer(customer_id, phone_override = null) {
+    const body = { customer_id };
+    if (phone_override) body.phone_override = phone_override;
+    const res = await fetch(`${BASE}/api/voice/call`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    return res.json();
+  },
 };
 
 export function createWS(path) {

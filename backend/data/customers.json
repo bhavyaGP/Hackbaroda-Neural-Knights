@@ -1,19 +1,19 @@
 {
   "C001": {
     "id": "C001",
-    "name": "Rahul Mehta",
-    "email": "rahul.mehta@techcorp.in",
-    "phone": "+91-9876543210",
+    "name": "Bhavya Prajapati",
+    "email": "bhavya.prajapati@techcorp.in",
+    "phone": "+918780034261",
     "tier": "premium",
     "products": [
-      "Analytics Pro",
-      "Data Pipeline",
-      "API Gateway"
+      "QuicklearnAI's Scholar's Pack",
+      "Youtube Subscription",
+      "Iphone 17 Pro"
     ],
     "subscription_status": "active",
     "lifetime_value": 12400.0,
-    "updated_at": "2026-06-07T07:46:34.843950",
-    "created_at": "2026-06-07T07:46:34.843950"
+    "updated_at": "2026-06-07T08:39:12.570653",
+    "created_at": "2026-06-07T08:39:12.570653"
   },
   "C002": {
     "id": "C002",
@@ -26,8 +26,8 @@
     ],
     "subscription_status": "trial",
     "lifetime_value": 0.0,
-    "updated_at": "2026-06-07T07:46:34.844950",
-    "created_at": "2026-06-07T07:46:34.844950"
+    "updated_at": "2026-06-07T08:39:12.571600",
+    "created_at": "2026-06-07T08:39:12.571600"
   },
   "C003": {
     "id": "C003",
@@ -43,14 +43,14 @@
     ],
     "subscription_status": "active",
     "lifetime_value": 84000.0,
-    "updated_at": "2026-06-07T07:46:34.846049",
-    "created_at": "2026-06-07T07:46:34.846049"
+    "updated_at": "2026-06-07T08:39:12.571600",
+    "created_at": "2026-06-07T08:39:12.571600"
   },
   "C004": {
     "id": "C004",
     "name": "Priya Sharma",
     "email": "priya.sharma@ecomm.in",
-    "phone": "+91-8765432109",
+    "phone": "+918780034261",
     "tier": "premium",
     "products": [
       "Analytics Pro",
@@ -58,7 +58,7 @@
     ],
     "subscription_status": "active",
     "lifetime_value": 5200.0,
-    "updated_at": "2026-06-07T07:46:34.846049",
-    "created_at": "2026-06-07T07:46:34.846049"
+    "updated_at": "2026-06-07T08:39:12.572597",
+    "created_at": "2026-06-07T08:39:12.572597"
   }
 }

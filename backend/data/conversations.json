@@ -31,5 +31,49 @@
     "intent": "cancellation",
     "created_at": "2026-06-07T07:52:42.329409",
     "updated_at": "2026-06-07T07:53:06.253636"
+  },
+  "659660eb-0c2f-4cd8-a88d-3cecac843b89": {
+    "id": "659660eb-0c2f-4cd8-a88d-3cecac843b89",
+    "customer_id": "C001",
+    "channel": "voice",
+    "status": "closed",
+    "sentiment_score": 0.0,
+    "churn_risk": 0.0,
+    "intent": "unknown",
+    "created_at": "2026-06-07T08:50:39.187544",
+    "updated_at": "2026-06-07T08:50:59.237239"
+  },
+  "89b5fdb2-0872-4ea4-b734-7c3998241474": {
+    "id": "89b5fdb2-0872-4ea4-b734-7c3998241474",
+    "customer_id": "C001",
+    "channel": "voice",
+    "status": "closed",
+    "sentiment_score": 0.0,
+    "churn_risk": 0.0,
+    "intent": "unknown",
+    "created_at": "2026-06-07T08:55:14.115048",
+    "updated_at": "2026-06-07T08:55:32.585958"
+  },
+  "52536e84-7757-4e3d-b60f-ce59b5d7799e": {
+    "id": "52536e84-7757-4e3d-b60f-ce59b5d7799e",
+    "customer_id": "C001",
+    "channel": "voice",
+    "status": "closed",
+    "sentiment_score": -0.7,
+    "churn_risk": 0.8,
+    "intent": "technical",
+    "created_at": "2026-06-07T08:58:37.795823",
+    "updated_at": "2026-06-07T09:00:33.851606"
+  },
+  "fb3edabd-2600-4fad-9913-1cfe8cca1759": {
+    "id": "fb3edabd-2600-4fad-9913-1cfe8cca1759",
+    "customer_id": "C001",
+    "channel": "voice",
+    "status": "closed",
+    "sentiment_score": 0.0,
+    "churn_risk": 0.0,
+    "intent": "unknown",
+    "created_at": "2026-06-07T09:00:46.514098",
+    "updated_at": "2026-06-07T09:00:54.428830"
   }
 }

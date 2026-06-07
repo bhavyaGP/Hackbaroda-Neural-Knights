@@ -8,5 +8,25 @@
     "priority": "high",
     "status": "open",
     "created_at": "2026-06-07T07:53:06.256635"
+  },
+  "b7482e28-ac2f-4b2f-9d00-1250014c0351": {
+    "id": "b7482e28-ac2f-4b2f-9d00-1250014c0351",
+    "customer_id": "C001",
+    "conversation_id": "52536e84-7757-4e3d-b60f-ce59b5d7799e",
+    "title": "API Gateway Error for Rahul Mehta",
+    "description": "Actually, my product has run into an error and it is not working. What should I do?",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T08:59:20.108274"
+  },
+  "78ef96a8-337f-400e-80e2-ccb2014466f4": {
+    "id": "78ef96a8-337f-400e-80e2-ccb2014466f4",
+    "customer_id": "C001",
+    "conversation_id": "52536e84-7757-4e3d-b60f-ce59b5d7799e",
+    "title": "API Gateway Error Investigation",
+    "description": "Then what should I give you?",
+    "priority": "high",
+    "status": "open",
+    "created_at": "2026-06-07T09:00:03.915232"
   }
 }

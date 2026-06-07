@@ -47,5 +47,102 @@
       "sentiment_score": -0.8,
       "churn_risk": 0.9
     }
+  ],
+  "659660eb-0c2f-4cd8-a88d-3cecac843b89": [
+    {
+      "id": "47187b58-fde7-41e4-bf71-2a5ce794085f",
+      "conversation_id": "659660eb-0c2f-4cd8-a88d-3cecac843b89",
+      "role": "system",
+      "content": "Outbound call initiated to +918780034261 \u2014 SID: CA32f04c1733f316ca362290903f8c94df",
+      "timestamp": "2026-06-07T08:50:39.189663"
+    },
+    {
+      "id": "804cb368-2bdb-4aa9-801c-b414d6edca2c",
+      "conversation_id": "659660eb-0c2f-4cd8-a88d-3cecac843b89",
+      "role": "assistant",
+      "content": "Hello Rahul Mehta! This is Aria from support. Thank you for taking our call. I have your account pulled up and I'm here to assist you. How can I help you today?",
+      "timestamp": "2026-06-07T08:50:54.249986"
+    }
+  ],
+  "89b5fdb2-0872-4ea4-b734-7c3998241474": [
+    {
+      "id": "ec5e8ecb-9fdf-4bf5-b043-c91bc425d17c",
+      "conversation_id": "89b5fdb2-0872-4ea4-b734-7c3998241474",
+      "role": "system",
+      "content": "Outbound call initiated to +918780034261 \u2014 SID: CAd480ddd84b79cbb7e0d02418d9f37b7f",
+      "timestamp": "2026-06-07T08:55:14.119085"
+    },
+    {
+      "id": "b35959dd-a9c1-4e68-aee2-443afcc25ce6",
+      "conversation_id": "89b5fdb2-0872-4ea4-b734-7c3998241474",
+      "role": "assistant",
+      "content": "Hello Rahul Mehta! This is Aria from support. Thank you for taking our call. I have your account pulled up and I'm here to assist you. How can I help you today?",
+      "timestamp": "2026-06-07T08:55:27.957941"
+    }
+  ],
+  "52536e84-7757-4e3d-b60f-ce59b5d7799e": [
+    {
+      "id": "4bd2ce47-c5e5-4689-92f6-b8a5ccd0abdb",
+      "conversation_id": "52536e84-7757-4e3d-b60f-ce59b5d7799e",
+      "role": "system",
+      "content": "Outbound call initiated to +918780034261 \u2014 SID: CAb1751c27106bc986e24bebbd0b95b7cc",
+      "timestamp": "2026-06-07T08:58:37.798819"
+    },
+    {
+      "id": "d9de287a-40db-46f5-92df-95be29cf4af0",
+      "conversation_id": "52536e84-7757-4e3d-b60f-ce59b5d7799e",
+      "role": "assistant",
+      "content": "Hello Rahul Mehta! This is Aria from support. Thank you for taking our call. I have your account pulled up and I'm here to assist you. How can I help you today?",
+      "timestamp": "2026-06-07T08:58:50.632608"
+    },
+    {
+      "id": "64923069-8629-4881-a006-857a409fc6b9",
+      "conversation_id": "52536e84-7757-4e3d-b60f-ce59b5d7799e",
+      "role": "customer",
+      "content": "Actually, my product has run into an error and it is not working. What should I do?",
+      "timestamp": "2026-06-07T08:59:13.055120"
+    },
+    {
+      "id": "61e0ab57-36e2-4689-8605-8361880d069b",
+      "conversation_id": "52536e84-7757-4e3d-b60f-ce59b5d7799e",
+      "role": "assistant",
+      "content": "I\u2019m really sorry to hear that you\u2019re experiencing an error with your product. I see you\u2019ve had some ongoing issues with the API Gateway in the past, and I understand how frustrating that can be. Let\u2019s work together to get this resolved. \n\nCould you please provide me with any specific error messages you\u2019re seeing? Additionally, if you have any screenshots or logs, that would be really helpful in diagnosing the issue. Once I have that information, I can create a priority ticket for the technical team to investigate right away!",
+      "timestamp": "2026-06-07T08:59:20.105299",
+      "agents_used": [
+        "MEMORY_AGENT",
+        "ESCALATION_AGENT"
+      ],
+      "sentiment_score": -0.7,
+      "churn_risk": 0.8
+    },
+    {
+      "id": "5ad1519b-7486-4c6f-9116-2a492d7b5878",
+      "conversation_id": "52536e84-7757-4e3d-b60f-ce59b5d7799e",
+      "role": "customer",
+      "content": "Then what should I give you?",
+      "timestamp": "2026-06-07T08:59:58.318880"
+    },
+    {
+      "id": "36873be5-8eb4-4668-8b2b-efac0a95513f",
+      "conversation_id": "52536e84-7757-4e3d-b60f-ce59b5d7799e",
+      "role": "assistant",
+      "content": "Please provide me with any specific error messages you're seeing when trying to use the product. Additionally, if you can take a screenshot of the error or share any logs that appear in the browser console, that would be very helpful. With this information, I can create a priority ticket for our technical team to investigate the issue more effectively!",
+      "timestamp": "2026-06-07T09:00:03.910307",
+      "agents_used": [
+        "MEMORY_AGENT",
+        "ESCALATION_AGENT"
+      ],
+      "sentiment_score": -0.7,
+      "churn_risk": 0.8
+    }
+  ],
+  "fb3edabd-2600-4fad-9913-1cfe8cca1759": [
+    {
+      "id": "7d7ec831-a110-4957-bf05-af2e3135d340",
+      "conversation_id": "fb3edabd-2600-4fad-9913-1cfe8cca1759",
+      "role": "system",
+      "content": "Outbound call initiated to +918780034261 \u2014 SID: CA4eab7c7d1be964389bc9eeb2a44eaa58",
+      "timestamp": "2026-06-07T09:00:46.521587"
+    }
   ]
 }

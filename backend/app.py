@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from seed_data import seed_database
-from routers import chat, dashboard, customers
+from routers import chat, dashboard, customers, voice
 
 
 @asynccontextmanager
@@ -30,6 +30,7 @@ app.add_middleware(
 app.include_router(chat.router, prefix="/api/chat", tags=["Chat"])
 app.include_router(dashboard.router, prefix="/api/dashboard", tags=["Dashboard"])
 app.include_router(customers.router, prefix="/api/customers", tags=["Customers"])
+app.include_router(voice.router, prefix="/api/voice", tags=["Voice"])
 
 
 @app.get("/health")
